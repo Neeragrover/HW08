@@ -20,11 +20,9 @@
 ##############################################################################
 
 # Imports
+import re
 
 # Body
-
-pledge_histogram = {}
-
 def histogram_old(s):
     d = dict()
     for c in s:
@@ -35,19 +33,36 @@ def histogram_old(s):
     return d
 
 def histogram_new(s):
-    pass
+	d = dict()
+	for c in s:
+		d[c] = d.get(c,0)
+		d[c] +=1
+	return d
 
 def get_pledge_list():
-    """ Opens pledge.txt and converts to a list, each item is a word in 
+	""" Opens pledge.txt and converts to a list, each item is a word in 
     the order it appears in the original file. returns the list.
     """
+	with open("pledge.txt") as f:
+		data = f.read()
+	data1 = re.sub('[\W]+', ' ',data)
+	x = data1.split()
+	return x
+
+	
     # Your code here.
-    pass
+
     #return pledge_list (uncomment this)
 
 ##############################################################################
 def main():  # DO NOT CHANGE BELOW
-    print histogram_new(get_pledge_list())
+#	print "old histogram"
+#	print histogram_old({'a':1,'b':2,'c':3})
+#	print histogram_old("hello")
+#	print " new histogram"
+#	print histogram_new("hello	")
+#	get_pledge_list()
+	print histogram_new(get_pledge_list())
 
 if __name__ == '__main__':
     main()
